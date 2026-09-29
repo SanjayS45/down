@@ -1,15 +1,12 @@
 import { http, createConfig } from "wagmi";
+import { injected } from "wagmi/connectors/injected";
 import { baseSepolia } from "wagmi/chains";
-import { baseAccount, injected } from "wagmi/connectors";
 
 const rpc = process.env.NEXT_PUBLIC_RPC_URL || "https://sepolia.base.org";
 
 export const config = createConfig({
   chains: [baseSepolia],
-  connectors: [
-    baseAccount({ appName: "Down" }),
-    injected({ shimDisconnect: true }),
-  ],
+  connectors: [injected({ shimDisconnect: true })],
   transports: {
     [baseSepolia.id]: http(rpc),
   },
